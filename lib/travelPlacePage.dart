@@ -7,7 +7,7 @@ class TravelPlacePage extends StatelessWidget{
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    Widget imageSection = Image.asset('assets/img/place.png', width: size.width, height: size.width * .30, fit: BoxFit.cover,);
+    Widget imageSection = Image.asset('assets/img/place.jpg', width: size.width, height: size.width * .30, fit: BoxFit.cover,);
     Widget titleSection =Padding(
       padding: EdgeInsets.all(32),
       child: Row(
@@ -29,13 +29,45 @@ class TravelPlacePage extends StatelessWidget{
         ],
       ),
     );
+    Widget buttonsSection = Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          _buildBtnColumn("CALL", Icons.call, Colors.blue),
+          _buildBtnColumn("ROUTE", Icons.near_me, Colors.blue),
+          _buildBtnColumn("SHARE", Icons.share, Colors.blue),
+        ]
+
+    );
+    Widget descriptionSection = Container(
+      padding: EdgeInsets.all(32),
+      child: Text('Texto largo', softWrap: true, textAlign: TextAlign.center,),
+    );
+
     return Scaffold(
-        body: Column(
-            children: [
-              imageSection,
-              titleSection
-            ],
-            ),
+
+      body: SingleChildScrollView(
+          child: Column(children: [
+            imageSection,
+            titleSection,
+            buttonsSection,
+            descriptionSection
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildBtnColumn(String title, IconData icon, Color color){
+    return Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(icon, color: color,),
+          Padding(padding: EdgeInsets.only(top: 8),
+            child: Text(title, style: TextStyle(color: color),),
+          )
+        ],
+
         );
     }
 }
